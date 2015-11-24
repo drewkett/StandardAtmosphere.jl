@@ -1,18 +1,17 @@
 module StandardAtmosphere
 
-export Atm
+export Atm, Env, kcas, keas, ktas, mach
 
 using JSON
 using Base.Test
-import Base: show
+import Base: show, *
 
-using MySIUnits
-import MySIUnits: SILength, SITemperature, SIPressure, SIDensity, SIVelocity, N, LengthUnit, TemperatureUnit
+using SIUnits
 
 immutable Atm
-    altitude::SILength{Float64}
-    delta_temperature::SITemperature{Float64}
-    temperature::SITemperature{Float64}
+    altitude::@quantity(Float64,Meter)
+    delta_temperature::@quantity(Float64,Kelvin)
+    temperature::@quantity(Float64,Kelvin)
     temperature_ratio::Float64
     pressure::SIPressure{Float64}
     pressure_ratio::Float64
@@ -26,7 +25,7 @@ SeaLevelTemperature = 288.2K
 SeaLevelDensity = 1.225kg/m^3
 SeaLevelPressure = 101325N/m^2
 SeaLevelSpeedOfSound = 340.294m/s
-function Atm(altitude::SILength{Float64},delta_temperature::SITemperature{Float64} = 0.0K)
+function Atm(altitude::@quantity(Float64,Meter),delta_temperature::@quantity(Float64,Kelvin) = 0.0K)
     if (altitude < 36089.24ft)
         temperature_ratio = (1-altitude/145445.6ft);
         pressure_ratio = temperature_ratio^5.2561;

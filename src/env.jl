@@ -1,11 +1,3 @@
-export Env, kcas, keas, ktas, mach
-
-using StandardAtmosphere
-using MySIUnits
-using MySIUnits: SIVelocity, SIPressure, SILength, SITemperature, LengthUnit, TemperatureUnit
-
-import Base: *
-
 immutable AirspeedType{str} end
 kcas = AirspeedType{:kcas}()
 keas = AirspeedType{:keas}()
