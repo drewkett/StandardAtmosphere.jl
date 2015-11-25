@@ -2,8 +2,6 @@ module StandardAtmosphere
 
 export Atm, Env, kcas, keas, ktas, mach
 
-using JSON
-using Base.Test
 import Base: show, *
 
 using SIUnits
